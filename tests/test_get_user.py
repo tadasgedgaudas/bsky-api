@@ -1,9 +1,10 @@
 import datetime
-from pydantic_core import TzInfo, Url
+from pydantic_core import Url
 import pytest
 from typing import AsyncGenerator
-from src.modules.get_user import Associated, PinnedPost, User, UserItem, Viewer
+from src.models.user import Associated, PinnedPost, UserItem, Viewer
 from src.modules.login import Login
+from src.modules.user import User
 from tests.settings import settings
 
 
