@@ -34,6 +34,7 @@ async def test_follow_user(logged_in_client: Login) -> None:
     user_did = "did:plc:hv5mkduryfgajlvmbo3ruole"
 
     user = User(login)
-    follow_response = await user.follow(user_did)
+    followers_response = await user.followers(user_did)
 
-    assert follow_response.validation_status == "valid"
+    assert followers_response.cursor is not None
+    assert len(followers_response.users) > 0
