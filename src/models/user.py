@@ -57,6 +57,14 @@ class FollowRecord(BaseModel):
         extra = "allow"
 
 
+class UnfollowRecord(BaseModel):
+    cid: str
+    rev: str
+
+    class Config:
+        extra = "allow"
+
+
 class Users(BaseModel):
     users: list[UserItem]
     cursor: str | None = None

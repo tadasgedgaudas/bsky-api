@@ -1,9 +1,7 @@
 import pytest
-from typing import AsyncGenerator
 from src.models.user import Commit, FollowRecord
 from src.modules.login import Login
 from src.modules.user import User
-from tests.settings import settings
 
 FOLLOW_RECORD = FollowRecord(
     uri="at://did:plc:wpixnhsqu4p5ix23recmsda7/app.bsky.graph.follow/3lbfsmppgrg2p",
@@ -14,17 +12,6 @@ FOLLOW_RECORD = FollowRecord(
     ),
     validation_status="valid",
 )
-
-
-@pytest.fixture
-async def logged_in_client() -> AsyncGenerator[Login, None]:
-    login = Login(
-        username=settings.bsky_username,
-        password=settings.bsky_password,
-        user_agent=settings.user_agent,
-    )
-    await login.login()
-    yield login
 
 
 @pytest.mark.asyncio
