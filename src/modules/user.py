@@ -1,5 +1,6 @@
+from src.helpers import get_record_key
 from src.models.post import Feed, PostItem
-from src.models.user import FollowRecord, UserItem, Users
+from src.models.user import FollowRecord, UnfollowRecord, UserItem, Users
 from src.modules.login import Login
 from src.response import check_response
 
@@ -41,7 +42,11 @@ class User:
 
         return FollowRecord(**response.json())
 
-    async def unfollow(self, did: str) -> FollowRecord:
+    async def unfollow(self, did: str, record_key: str | None = None) -> UnfollowRecord:
+        if not record_key:
+            follow_record = await self.follow(did)
+            record_key = get_record_key(follow_record.uri)
+
         url_path: str = "/xrpc/com.atproto.repo.deleteRecord"
 
         url = f"{self.login.session.service_endpoint}{url_path}"
@@ -49,14 +54,14 @@ class User:
         payload = {
             "collection": "app.bsky.graph.follow",
             "repo": self.login.session.controller_did,
-            "record": did,
+            "rkey": record_key,
         }
 
         response = await self.login.async_session.post(url, json=payload)
 
         check_response(response)
 
-        return FollowRecord(**response.json())
+        return UnfollowRecord(**response.json())
 
     async def followers(
         self, did: str, limit: int = 30, cursor: str | None = None
