@@ -1,8 +1,8 @@
-from src.helpers import get_record_key
-from src.models.post import Feed, PostItem
-from src.models.user import FollowRecord, UnfollowRecord, UserItem, Users
-from src.modules.login import Login
-from src.response import check_response
+from bsky_api.helpers import get_record_key
+from bsky_api.models.post import Feed, PostItem
+from bsky_api.models.user import FollowRecord, UnfollowRecord, UserItem, Users
+from bsky_api.modules.login import Login
+from bsky_api.response import check_response
 
 
 class User:

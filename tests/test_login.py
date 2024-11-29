@@ -1,6 +1,6 @@
 import pytest
 
-from src.modules.login import Login
+from bsky_api.modules.login import Login
 from tests.settings import settings
 
 

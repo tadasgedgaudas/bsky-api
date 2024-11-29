@@ -1,7 +1,7 @@
 import pytest
-from src.models.user import Commit, FollowRecord
-from src.modules.login import Login
-from src.modules.user import User
+from bsky_api.models.user import Commit, FollowRecord
+from bsky_api.modules.login import Login
+from bsky_api.modules.user import User
 
 FOLLOW_RECORD = FollowRecord(
     uri="at://did:plc:wpixnhsqu4p5ix23recmsda7/app.bsky.graph.follow/3lbfsmppgrg2p",

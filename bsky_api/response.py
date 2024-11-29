@@ -1,5 +1,5 @@
 from curl_cffi.requests import Response
-from src.exceptions import HTTPError
+from bsky_api.exceptions import HTTPError
 
 
 def check_response(response: Response) -> None:
