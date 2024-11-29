@@ -1,9 +1,9 @@
 import datetime
 from pydantic_core import Url
 import pytest
-from src.models.user import Associated, PinnedPost, UserItem, Viewer
-from src.modules.login import Login
-from src.modules.user import User
+from bsky_api.models.user import Associated, PinnedPost, UserItem, Viewer
+from bsky_api.modules.login import Login
+from bsky_api.modules.user import User
 
 
 USER_INFO = UserItem(
