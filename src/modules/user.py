@@ -83,6 +83,26 @@ class User:
             cursor=response.json().get("cursor"),
         )
 
+    async def following(
+        self, did: str, limit: int = 30, cursor: str | None = None
+    ) -> Users:
+        url_path: str = "/xrpc/app.bsky.graph.getFollows"
+        params: dict[str, str] = {"actor": did, "limit": limit}
+
+        if cursor:
+            params["cursor"] = cursor
+
+        url = f"{self.login.session.service_endpoint}{url_path}"
+
+        response = await self.login.async_session.get(url, params=params)
+
+        check_response(response)
+
+        return Users(
+            users=[UserItem(**user) for user in response.json()["follows"]],
+            cursor=response.json().get("cursor"),
+        )
+
     async def feed(self, did: str, limit: int = 30, cursor: str | None = None) -> Feed:
         url_path: str = "/xrpc/app.bsky.feed.getAuthorFeed"
         params: dict[str, str] = {
